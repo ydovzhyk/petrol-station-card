@@ -14,13 +14,15 @@ import { useDispatch } from "react-redux";
 
 import { Gravatar, GravatarApi } from "react-native-gravatar";
 
-// import { authSignUpUser } from "../../redux/auth/authOperations";
+import {
+  authSignUpUser,
+  signInWithVerificationCode,
+} from "../../Redux/auth/authOperations";
 
 const initialState = {
-  nickName: "",
-  email: "",
-  password: "",
+  phone: "",
   avatarUrl: "",
+  code: "",
 };
 
 const RegistrationScreen = ({ navigation }) => {
@@ -37,6 +39,7 @@ const RegistrationScreen = ({ navigation }) => {
   };
 
   const handleSubmit = () => {
+    dispatch(signInWithVerificationCode(state));
     // dispatch(authSignUpUser(state));
     setState(initialState);
   };
@@ -91,20 +94,20 @@ const RegistrationScreen = ({ navigation }) => {
                 <View style={styles.inputBackground}>
                   <TextInput
                     style={styles.inputForm}
-                    placeholder={"Nickname"}
+                    placeholder={"phone"}
                     maxLength={40}
                     placeholderTextColor={"#BDBDBD"}
-                    value={state.nickName}
+                    value={state.phone}
                     onFocus={() => setIsShowKeyboard(true)}
                     onChangeText={(value) =>
                       setState((prevState) => ({
                         ...prevState,
-                        nickName: value,
+                        phone: value,
                       }))
                     }
                   />
                 </View>
-                <View style={styles.inputBackground}>
+                {/* <View style={styles.inputBackground}>
                   <TextInput
                     style={styles.inputForm}
                     placeholder={"Email"}
@@ -125,8 +128,8 @@ const RegistrationScreen = ({ navigation }) => {
                       setState((prevState) => ({ ...prevState, email: value }))
                     }
                   />
-                </View>
-                <View style={styles.inputPassword}>
+                </View> */}
+                {/* <View style={styles.inputPassword}>
                   <View style={styles.inputBackground}>
                     <TextInput
                       style={styles.inputForm}
@@ -160,7 +163,7 @@ const RegistrationScreen = ({ navigation }) => {
                       {statePassword ? "Show" : "Hide"}
                     </Text>
                   </TouchableOpacity>
-                </View>
+                </View> */}
                 <TouchableOpacity
                   activeOpacity={0.8}
                   style={styles.btn}
